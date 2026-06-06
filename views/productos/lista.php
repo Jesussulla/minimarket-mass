@@ -1,4 +1,5 @@
 <?php require __DIR__ . '/../layout/header.php'; ?>
+<?php require __DIR__ . '/../auth/barra_usuario.php'; ?>
 
 <h1>Catálogo del Minimarket Mass</h1>
 <p>Total de productos: <strong><?= count($productos) ?></strong></p>
