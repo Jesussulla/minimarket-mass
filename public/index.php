@@ -47,4 +47,14 @@ switch ($accion) {
         requiereLogin();
         (new ProductoController())->listar();
         break;
+    
+    case 'nuevo-producto':
+        requiereLogin();
+        (new ProductoController())->nuevo();
+        break;
+
+    case 'guardar-producto':
+        requiereLogin();
+        (new ProductoController())->guardar();
+        break;
 }
