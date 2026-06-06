@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-require_once __DIR__ . '/../models/Producto.php';
+require_once __DIR__ . '/Producto.php';
 require_once __DIR__ . '/../config/conexion.php';
 
 class ProductoRepository {

@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-require_once __DIR__ . '/ProductoRepository.php';
+require_once __DIR__ . '/models/ProductoRepository.php';
 
 $repo = new ProductoRepository();
 
