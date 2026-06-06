@@ -2,9 +2,10 @@
 require_once __DIR__ . '/../../helpers/sesion.php';
 requiereLogin();
 
-$nombre = $_SESSION['usuario']['nombre'] ?? 'Usuario';
-$rol    = $_SESSION['usuario']['rol']    ?? 'cajero';
-$tienda = $_SESSION['usuario']['tienda'] ?? 'Tienda';
+$nombre       = $_SESSION['usuario']['nombre']       ?? 'Usuario';
+$rol          = $_SESSION['usuario']['rol']          ?? 'cajero';
+$tienda       = $_SESSION['usuario']['tienda']       ?? 'Tienda';
+$ultimoAcceso = $_SESSION['usuario']['ultimo_acceso'] ?? '--';
 
 $modoTexto  = ($rol === 'admin') ? '⚙️ Modo administrador' : '🛒 Caja';
 $badgeColor = ($rol === 'admin') ? '#e67e22' : '#27ae60';
@@ -16,10 +17,12 @@ $badgeColor = ($rol === 'admin') ? '#e67e22' : '#27ae60';
   .barra-logo{font-weight:800;font-size:16px;letter-spacing:2px;border-right:2px solid rgba(255,255,255,.2);padding-right:14px}
   .barra-info{font-size:13px}
   .barra-info strong{display:block;font-weight:700}
-  .barra-info span{opacity:.8;font-size:12px}
+  .barra-info span{opacity:.8;font-size:12px;display:block}
   .badge{padding:3px 12px;border-radius:20px;font-size:11px;font-weight:700;color:#fff;background:<?= $badgeColor ?>}
   .barra-der{display:flex;align-items:center;gap:12px}
   .reloj{font-size:12px;opacity:.7;font-weight:600}
+  .btn-panel{background:#e67e22;color:#fff;padding:6px 16px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:700;transition:all .2s}
+  .btn-panel:hover{background:#d35400;transform:translateY(-1px)}
   .btn-salir{background:#fff;color:#0066B3;padding:6px 16px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:700;transition:all .2s}
   .btn-salir:hover{background:#e8f0fe;transform:translateY(-1px)}
 </style>
@@ -30,11 +33,15 @@ $badgeColor = ($rol === 'admin') ? '#e67e22' : '#27ae60';
     <div class="barra-info">
       <strong>👤 <?= htmlspecialchars($nombre) ?></strong>
       <span>🏪 <?= htmlspecialchars($tienda) ?></span>
+      <span>🕐 Último acceso: <?= htmlspecialchars($ultimoAcceso) ?></span>
     </div>
     <span class="badge"><?= $modoTexto ?></span>
   </div>
   <div class="barra-der">
     <span class="reloj" id="reloj"></span>
+    <?php if ($rol === 'admin'): ?>
+      <a href="index.php?accion=panel-admin" class="btn-panel">⚙️ Panel</a>
+    <?php endif; ?>
     <a href="index.php?accion=logout" class="btn-salir">⏻ Salir</a>
   </div>
 </div>

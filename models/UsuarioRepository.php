@@ -4,11 +4,12 @@ require_once __DIR__ . '/usuario.php';
 require_once __DIR__ . '/../config/conexion.php';
 
 class UsuarioRepository {
+
     public function buscarPorUsername(string $username): ?Usuario {
         try {
             $pdo  = getConexion();
             $stmt = $pdo->prepare(
-                "SELECT id, username, nombres, apellidos, rol, tienda, password_hash
+                "SELECT id, username, nombres, apellidos, rol, tienda, password_hash, ultimo_acceso
                  FROM usuarios
                  WHERE username = :username AND activo = 1"
             );
@@ -22,11 +23,24 @@ class UsuarioRepository {
                 $f['apellidos'],
                 $f['rol'],
                 $f['tienda'],
-                $f['password_hash']
+                $f['password_hash'],
+                $f['ultimo_acceso'] ?? null
             );
         } catch (PDOException $e) {
             error_log('[UsuarioRepository] ' . $e->getMessage());
             return null;
+        }
+    }
+
+    public function registrarAcceso(int $id): void {
+        try {
+            $pdo  = getConexion();
+            $stmt = $pdo->prepare(
+                "UPDATE usuarios SET ultimo_acceso = NOW() WHERE id = :id"
+            );
+            $stmt->execute([':id' => $id]);
+        } catch (PDOException $e) {
+            error_log('[UsuarioRepository::registrarAcceso] ' . $e->getMessage());
         }
     }
 }

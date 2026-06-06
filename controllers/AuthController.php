@@ -25,12 +25,18 @@ class AuthController {
             return;
         }
 
+        // Registrar último acceso
+        $repo->registrarAcceso($usuario->getId());
+
         $_SESSION['usuario'] = [
-            'id'       => $usuario->getId(),
-            'username' => $usuario->getUsername(),
-            'nombre'   => $usuario->getNombreCompleto(),
-            'rol'      => $usuario->getRol(),
-            'tienda'   => $usuario->getTienda(),
+            'id'            => $usuario->getId(),
+            'username'      => $usuario->getUsername(),
+            'nombre'        => $usuario->getNombreCompleto(),
+            'rol'           => $usuario->getRol(),
+            'tienda'        => $usuario->getTienda(),
+            'ultimo_acceso' => $usuario->getUltimoAcceso()
+                ? date('d/m/Y H:i', strtotime($usuario->getUltimoAcceso()))
+                : 'Primer acceso',
         ];
 
         header('Location: index.php?accion=catalogo');
