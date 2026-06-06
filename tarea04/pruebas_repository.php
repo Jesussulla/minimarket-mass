@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-require_once __DIR__ . '/models/ProductoRepository.php';
+require_once __DIR__ . '/ProductoRepository.php';
 
 $repo = new ProductoRepository();
 
@@ -27,3 +27,4 @@ echo "<p><em>Muestra los 5 productos más caros del catálogo, útil para el due
 foreach ($repo->obtenerMasCaros(5) as $p) {
     echo $p->getNombre() . " — S/ " . number_format($p->getPrecio(), 2) . "<br>";
 }
+?>
