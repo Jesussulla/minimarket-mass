@@ -2,30 +2,6 @@
 declare(strict_types=1);
 require_once 'models/ProductoRepository.php';
 
-/**
- * ════════════════════════════════════════════════════════════════════
- *  ¿POR QUÉ EXISTE EL REPOSITORY?
- * ════════════════════════════════════════════════════════════════════
- *
- * Este archivo NO es parte del sistema final. Es solo una demostración
- * para que se vea POR QUÉ vale la pena tener una clase aparte para
- * conseguir los productos, en vez de ponerlos directos en el Controller.
- *
- * Pregunta del día:
- *   "Si los datos están en un array hardcoded, ¿por qué crear una
- *    clase entera (ProductoRepository) en lugar de poner el array
- *    directo en el Controller?"
- *
- * Respuesta corta:
- *   El jueves (sesión 5) este array va a desaparecer y los datos
- *   van a venir de MySQL. Si los hubiéramos puesto en el Controller,
- *   tendríamos que reescribir el Controller entero. Como están en el
- *   Repository, SOLO cambia este archivo y nada más.
- *
- * URL para ejecutar:
- *   http://localhost:8080/MinimarketMass/test_repository.php
- * ════════════════════════════════════════════════════════════════════
- */
 
 echo '<h1>🧪 Demostración del Repository</h1>';
 
